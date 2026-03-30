@@ -552,7 +552,7 @@
                         <div id="price-calculation" style="display: none; margin-top: 0.5rem; background: #f9f9f9; padding: 1rem; border-radius: 4px; border: 1px solid var(--color-border);">
                             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                                 <span><span id="calc-nights">0</span> nights x Tsh 110,000</span>
-                                <span>$<span id="calc-subtotal">0</span></span>
+                                <span>Tsh<span id="calc-subtotal">0</span></span>
                             </div>
                             <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; border-top: 1px solid #ccc; padding-top: 0.5rem;">
                                 <span>Total Price:</span>
@@ -852,7 +852,7 @@
             const calcNights = document.getElementById('calc-nights');
             const calcSubtotal = document.getElementById('calc-subtotal');
             const calcTotal = document.getElementById('calc-total');
-            const PRICE_PER_NIGHT = 120;
+            const PRICE_PER_NIGHT = 110000;
 
             function calculatePrice() {
                 const checkInDate = new Date(checkInInput.value);
@@ -864,8 +864,8 @@
                     
                     calcNights.textContent = diffDays;
                     const total = diffDays * PRICE_PER_NIGHT;
-                    calcSubtotal.textContent = total;
-                    calcTotal.textContent = total;
+                    calcSubtotal.textContent = ' ' + total.toLocaleString('en-US');
+                    calcTotal.textContent = ' ' + total.toLocaleString('en-US');
                     priceCalcBox.style.display = 'block';
                 } else {
                     priceCalcBox.style.display = 'none';
@@ -901,7 +901,7 @@
                     message += `*Guests:* ${guests}\n`;
                     
                     if(priceCalcBox.style.display !== 'none') {
-                        message += `*Estimated Total:* $${total}\n`;
+                        message += `*Estimated Total:* Tsh${total}\n`;
                     }
                     
                     message += `\nPlease let me know if it's available.`;
