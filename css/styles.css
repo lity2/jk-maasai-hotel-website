@@ -1263,14 +1263,13 @@ ul.why-us {
     z-index: 9999;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
     background-color: #25D366;
     color: #fff;
     text-decoration: none;
-    font-size: 0.9375rem;
-    font-weight: 500;
-    border-radius: 50px;
+    border-radius: 50%;
     box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -1295,7 +1294,7 @@ ul.why-us {
 }
 
 .whatsapp-float__label {
-    white-space: nowrap;
+    display: none;
 }
 
 /* ------------------------------------------------------------
@@ -1312,8 +1311,9 @@ ul.why-us {
     .whatsapp-float {
         bottom: 1.25rem;
         right: 1rem;
-        padding: 0.65rem 1rem;
-        font-size: 0.875rem;
+        width: 50px;
+        height: 50px;
+        padding: 0;
     }
 
     .whatsapp-float__icon svg {

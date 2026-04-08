@@ -44,7 +44,6 @@
                             </ul>
                         </li>
                         <li><a href="#rooms">Accommodation</a></li>
-                        <li><a href="#facilities">Facilities</a></li>
                         <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -202,21 +201,7 @@
         </div>
     </section>
 
-    <!-- 4. FACILITIES & EXPERIENCES
-         What guests can do: dining, pool, safari, culture, etc. -->
-    <section id="facilities" class="reveal-on-scroll">
-        <h2>Facilities &amp; Experiences</h2>
-        <p>Enjoy our facilities and discover Ngorongoro.</p>
-        <ul>
-            <li>Restaurant — Local and international dishes</li>
-            <li>Bar &amp; lounge — Relax with a drink</li>
-            <li>Garden &amp; outdoor areas — Nature and relaxation</li>
-            <li>Safari &amp; tours — We can help you plan your trips</li>
-            <li>Cultural experiences — Learn about Maasai culture</li>
-        </ul>
-        <img src="images/IMG_rest4.webp" alt="Restaurant dining area at JK Maasai Hotel"
-            style="width: 100%; max-height: 500px; object-fit: cover; border-radius: 4px; margin-top: 1.5rem;">
-    </section>
+
 
     <!-- 5. GALLERY
          Grid of photo placeholders. Container + 6 gallery items. -->
@@ -235,6 +220,12 @@
         </div>
 
         <div class="gallery-grid">
+            <div class="gallery-item-wrapper" data-category="dining">
+                <img src="images/IMG_rest4.webp" alt="Restaurant Dining Area" class="gallery-item lightbox-trigger">
+                <div class="gallery-overlay">
+                    <span class="gallery-title">Restaurant Dining Area</span>
+                </div>
+            </div>
             <div class="gallery-item-wrapper" data-category="hotel">
                 <img src="images/IMG_veiw12.webp" alt="Landscape View" class="gallery-item lightbox-trigger">
                 <div class="gallery-overlay">
@@ -271,6 +262,9 @@
                     <span class="gallery-title">Scenic Outdoors</span>
                 </div>
             </div>
+        </div>
+        <div style="text-align: center; margin-top: 2.5rem;">
+            <button id="gallery-toggle-btn" style="background: transparent; border: 1.5px solid var(--color-primary); color: var(--color-primary); padding: 0.6rem 2rem; border-radius: 30px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; font-size: 0.95rem; display: none;">See More &darr;</button>
         </div>
     </section>
 
@@ -378,7 +372,6 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="index.html#about">About Us</a></li>
-                    <li><a href="index.html#facilities">Facilities &amp; Experience</a></li>
                     <li><a href="index.html#gallery">Gallery</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
@@ -534,36 +527,88 @@
                     }
                 });
             }
-            // Gallery Filtering Logic
+            // Gallery Filtering & See More Logic
             const filterBtns = document.querySelectorAll('.filter-btn');
             const galleryWrappers = document.querySelectorAll('.gallery-item-wrapper');
+            const galleryToggleBtn = document.getElementById('gallery-toggle-btn');
+            let isGalleryExpanded = false;
+            const MAX_VISIBLE = 6;
 
-            filterBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Remove active class from all buttons
-                    filterBtns.forEach(b => b.classList.remove('active'));
-                    // Add active class to clicked button
-                    this.classList.add('active');
+            function updateGalleryDisplay() {
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                let visibleCount = 0;
+                let totalMatches = 0;
 
-                    const filterValue = this.getAttribute('data-filter');
+                galleryWrappers.forEach(wrapper => {
+                    const category = wrapper.getAttribute('data-category');
+                    const matchesFilter = activeFilter === 'all' || category === activeFilter;
 
-                    galleryWrappers.forEach(wrapper => {
-                        if (filterValue === 'all' || wrapper.getAttribute('data-category') === filterValue) {
-                            wrapper.style.display = 'block';
-                            setTimeout(() => {
-                                wrapper.style.opacity = '1';
-                                wrapper.style.transform = 'scale(1)';
-                            }, 50);
-                        } else {
+                    if (matchesFilter) {
+                        totalMatches++;
+                        if (!isGalleryExpanded && totalMatches > MAX_VISIBLE) {
                             wrapper.style.opacity = '0';
                             wrapper.style.transform = 'scale(0.8)';
                             setTimeout(() => {
                                 wrapper.style.display = 'none';
                             }, 300);
+                        } else {
+                            wrapper.style.display = 'block';
+                            setTimeout(() => {
+                                wrapper.style.opacity = '1';
+                                wrapper.style.transform = 'scale(1)';
+                            }, 50);
                         }
-                    });
+                    } else {
+                        wrapper.style.opacity = '0';
+                        wrapper.style.transform = 'scale(0.8)';
+                        setTimeout(() => {
+                            wrapper.style.display = 'none';
+                        }, 300);
+                    }
+                });
+
+                if (galleryToggleBtn) {
+                    if (totalMatches > MAX_VISIBLE) {
+                        galleryToggleBtn.style.display = 'inline-block';
+                        galleryToggleBtn.innerHTML = isGalleryExpanded ? 'See Less &uarr;' : 'See More &darr;';
+                    } else {
+                        galleryToggleBtn.style.display = 'none';
+                    }
+                }
+            }
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    isGalleryExpanded = false;
+                    updateGalleryDisplay();
                 });
             });
+
+            if (galleryToggleBtn) {
+                galleryToggleBtn.addEventListener('click', function() {
+                    isGalleryExpanded = !isGalleryExpanded;
+                    if (!isGalleryExpanded) {
+                        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+                    }
+                    updateGalleryDisplay();
+                });
+
+                // Add hover effect identical to Accommodation button if desired
+                galleryToggleBtn.addEventListener('mouseover', function() {
+                    if (!this.matches(':hover')) return; // Ensure it's CSS-like hover 
+                    this.style.backgroundColor = 'var(--color-primary)';
+                    this.style.color = 'white';
+                });
+                galleryToggleBtn.addEventListener('mouseout', function() {
+                    this.style.backgroundColor = 'transparent';
+                    this.style.color = 'var(--color-primary)';
+                });
+            }
+
+            // Init gallery
+            updateGalleryDisplay();
         });
     </script>
 </body>
