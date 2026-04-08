@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Explore the extensive hotel amenities, room features, and exceptional services at JK Maasai Hotel near Ngorongoro.">
+    <meta name="keywords" content="Hotel Amenities, Room Amenities, Hotel Services, JK Maasai Hotel Ngorongoro">
+    <title>Why Choose Us – JK Maasai Hotel</title>
+    <link rel="icon" type="image/png" href="images/Logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-amenities {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('images/IMG_view7.webp');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .breadcrumb {
+            max-width: 1200px;
+            margin: 2rem auto 0;
+            padding: 0 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .breadcrumb a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--color-accent);
+            text-decoration: underline;
+        }
+
+        .amenities-section {
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .amenities-section h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2rem;
+            color: var(--color-primary);
+        }
+
+        .amenities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .amenity-card {
+            background: #fff;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: all 0.3s ease;
+        }
+
+        .amenity-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-accent);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+            background-color: rgba(227, 27, 35, 0.02);
+        }
+
+        .amenity-card:active {
+            transform: scale(0.95);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-container {
+            width: 88px;
+            height: 88px;
+            background-color: #f8f1ee;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem auto;
+            transition: all 0.3s ease;
+        }
+
+        .amenity-icon {
+            width: 48px;
+            height: 48px;
+            color: #C17A6B;
+            transition: all 0.3s ease;
+        }
+
+        .amenity-icon path {
+            stroke-width: 1.25;
+        }
+
+        .amenity-card:hover .icon-container {
+            background-color: #eee5e0;
+        }
+
+        .amenity-card:hover .amenity-icon {
+            color: #075E54;
+            transform: scale(1.1);
+        }
+
+        .amenity-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+
+        .amenity-card p {
+            font-size: 0.95rem;
+            color: var(--color-text-muted);
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. HEADER -->
+    <header id="hero" class="header--dark hero-amenities">
+        <div class="header-bar" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 10;">
+            <a href="index.html" class="logo-link" aria-label="JK Maasai Hotel home">
+                <img src="images/Logo.png" alt="JK Maasai Hotel logo" class="logo logo-light" width="180" height="55"
+                    decoding="async">
+                <img src="images/LOGO-02.png" alt="JK Maasai Hotel logo" class="logo logo-dark" width="180" height="55"
+                    decoding="async">
+            </a>
+            <div>
+                <nav class="header-nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#">About Us</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="index.html#about">Overview</a></li>
+                                <li><a href="why-us.html" class="is-active">Why Us</a></li>
+                                <li><a href="amenities.html">Amenities & Services</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="index.html#rooms">Accommodation</a></li>
+                        <li><a href="index.html#facilities">Facilities</a></li>
+                        <li><a href="index.html#gallery">Gallery</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <h1>Why Choose Us</h1>
+            <p>Discover what makes JK Maasai Hotel the perfect destination</p>
+        </div>
+    </header>
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &gt; Why Choose Us
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <section class="amenities-section reveal-on-scroll">
+        <div class="why-us-grid">
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                    </svg>
+                </div>
+                <h3>Peaceful Environment</h3>
+                <p>A tranquil haven to relax and reconnect with nature.</p>
+            </div>
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                    </svg>
+                </div>
+                <h3>Comfortable Rooms</h3>
+                <p>Luxurious and cozy spaces designed for your comfort.</p>
+            </div>
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3>Friendly Service</h3>
+                <p>Warm hospitality that makes you feel instantly at home.</p>
+            </div>
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3>Perfect for Every Traveler</h3>
+                <p>Ideal for solos, couples, or family adventures alike.</p>
+            </div>
+            <div class="why-us-card">
+                <div class="why-us-icon">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                <h3>Great Value</h3>
+                <p>Premium experiences that fit perfectly within your budget.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="footer">
+        <div class="footer-newsletter">
+            <div class="footer-newsletter-inner">
+                <h3>Subscribe to Our Newsletter</h3>
+                <p>Stay updated with our latest offers, safari news, and cultural events.</p>
+                <form id="newsletter-form" class="newsletter-form">
+                    <input type="email" id="newsletter-email" placeholder="Your Email Address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <p id="newsletter-status" class="newsletter-status"
+                    style="display: none; margin-top: 1rem; font-weight: 500;"></p>
+            </div>
+        </div>
+
+        <div class="footer-main">
+            <div class="footer-col">
+                <h4>About JK Maasai Hotel</h4>
+                <p class="footer-about-text">Experience comfort and culture in the heart of Ngorongoro, Tanzania. A
+                    perfect blend of safari adventure and peaceful relaxation.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Accommodation</h4>
+                <ul>
+                    <li><a href="standard-room.html">Standard Room</a></li>
+                    <li><a href="deluxe-room.html">Deluxe Room</a></li>
+                    <li><a href="family-room.html">Family Room</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#facilities">Facilities &amp; Experience</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul class="footer-contact-info">
+                    <li><i class="fa-solid fa-location-dot"></i><span>Ngorongoro, Tanzania</span></li>
+                    <li><i class="fa-solid fa-phone"></i><span>+255 796 100 500</span></li>
+                    <li><i class="fa-solid fa-envelope"></i><span>info@jkmaasaihotel.com</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 JK Maasai Hotel. Ngorongoro, Tanzania.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://wa.me/255693979377" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp booking button -->
+    <a href="https://wa.me/255693979377?text=Hello%2C%20I%20would%20like%20to%20inquire%20about%20JK%20Maasai%20Hotel."
+        class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Chat via WhatsApp">
+        <span class="whatsapp-float__icon" aria-hidden="true">
+            <i class="fa-brands fa-whatsapp" style="font-size: 28px;"></i>
+        </span>
+        <span class="whatsapp-float__label">Chat on WhatsApp</span>
+    </a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+
+</html>
