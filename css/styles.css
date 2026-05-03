@@ -726,7 +726,10 @@ section>h2 {
 
 .booking-form input[type="text"],
 .booking-form input[type="email"],
+.booking-form input[type="tel"],
+.booking-form input[type="number"],
 .booking-form input[type="date"],
+.booking-form select,
 .booking-form textarea {
     width: 100%;
     padding: 0.75rem 1rem;
@@ -745,6 +748,7 @@ section>h2 {
 }
 
 .booking-form input:focus,
+.booking-form select:focus,
 .booking-form textarea:focus {
     outline: none;
     border-color: var(--color-accent);

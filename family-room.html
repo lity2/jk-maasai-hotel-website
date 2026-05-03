@@ -436,6 +436,93 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Title Dropdown */
+        .title-with-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            margin-bottom: 0px;
+        }
+
+        .room-title h2 {
+            margin: 0 !important;
+            transition: opacity 0.4s ease;
+        }
+
+        .title-dropdown {
+            position: relative;
+            display: inline-flex;
+        }
+
+        #titleDropdownToggle {
+            background: var(--color-primary);
+            border: none;
+            cursor: pointer;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        #titleDropdownToggle:hover {
+            background: var(--color-accent);
+        }
+
+        #titleDropdownToggle.open {
+            transform: rotate(180deg);
+        }
+
+        .title-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background-color: white;
+            min-width: 250px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            border: 1px solid var(--color-border);
+            list-style: none;
+            padding: 0.5rem 0;
+            margin: 0;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .title-dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .title-dropdown-menu li {
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: var(--color-text);
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .title-dropdown-menu li:hover {
+            background-color: #f9f9f9;
+            color: var(--color-primary);
+        }
+
+        .title-dropdown-menu li.active {
+            color: var(--color-accent);
+            background-color: #fafafa;
+            border-left: 3px solid var(--color-accent);
+        }
     </style>
 </head>
 
@@ -485,15 +572,27 @@
             <!-- LEFT COLUMN -->
             <div class="room-main-col">
                 <div class="room-title">
-                    <h2>Family Room</h2>
+                    <div class="title-with-dropdown">
+                        <h2 id="dynamic-room-title">Family King Room</h2>
+                        <div class="title-dropdown">
+                            <button id="titleDropdownToggle" aria-label="Select room type">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </button>
+                            <ul class="title-dropdown-menu" id="titleDropdownMenu">
+                                <li data-tab="king" class="active">Family King Room</li>
+                                <li data-tab="twin">Family Twin Room</li>
+                                <li data-tab="triple">Family Triple Room</li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="price-per-night">
-                        <span class="price-amount">Tsh 110,000</span>
-                        <span class="price-label">/ night</span>
+                        <span class="price-amount" id="dynamic-price">Tsh 110,000</span>
+                        <span class="price-label" id="dynamic-price-label">/ night</span>
                     </div>
                 </div>
 
                 <div class="room-description">
-                    <p>Our Family Room is designed to give you plenty of space and comfort, making it perfect for
+                    <p id="dynamic-room-desc">Our Family Room is designed to give you plenty of space and comfort, making it perfect for
                         families. It features a large bedroom with a cozy bed, a spacious bathroom, and a separate
                         sitting area with a TV where you can relax and spend time together. Step outside onto the
                         private balcony, a perfect spot for couples to enjoy tea or have a quiet conversation. Bright,
@@ -523,7 +622,7 @@
                     <div class="overview-list">
                         <div class="overview-row">
                             <span class="overview-label">Occupancy:</span>
-                            <span class="overview-value">1 person</span>
+                            <span class="overview-value" id="dynamic-occupancy">1-2 person</span>
                         </div>
                         <div class="overview-row">
                             <span class="overview-label">Room service:</span>
@@ -617,9 +716,14 @@
                     <h3>Room Gallery</h3>
 
                     <div class="slider-main" id="room-slider">
-                        <img src="images/IMG_room1.webp" alt="Standard Room main view" class="active lightbox-trigger">
-                        <img src="images/IMG_room11.jpg" alt="Standard Room seating area" class="lightbox-trigger">
-                        <img src="images/IMG_room12.jpg" alt="Standard Room details" class="lightbox-trigger">
+                        <div id="coming-soon-overlay" style="display:none; position:absolute; top:0; left:0; width:100%; height:100%; background:white; z-index:10; flex-direction:column; align-items:center; justify-content:center; text-align:center;">
+                            <i class="fa-solid fa-camera" style="font-size:3rem; margin-bottom:1rem; color:var(--color-accent);"></i>
+                            <h2 style="color:var(--color-primary); margin:0; font-size:2rem; letter-spacing:1px; border:none;">Coming Soon</h2>
+                            <p style="margin-top:0.5rem; font-size:1.1rem; color:#666;">Photos will be available shortly.</p>
+                        </div>
+                        <img src="images/IMG_room23.webp" alt="Family Room main view" class="active lightbox-trigger">
+                        <img src="images/IMG_room11.webp" alt="Family Room seating area" class="lightbox-trigger">
+                        <img src="images/IMG_room12.webp" alt="Family Room details" class="lightbox-trigger">
 
                         <div class="slider-nav">
                             <button class="slider-btn prev-btn" id="slider-prev" aria-label="Previous image">
@@ -638,9 +742,9 @@
                     </div>
 
                     <div class="slider-thumbnails" id="slider-thumbs">
-                        <img src="images/IMG_room1.webp" alt="Thumbnail 1" class="slider-thumb active" data-index="0">
-                        <img src="images/IMG_room11.jpg" alt="Thumbnail 2" class="slider-thumb" data-index="1">
-                        <img src="images/IMG_room12.jpg" alt="Thumbnail 3" class="slider-thumb" data-index="2">
+                        <img src="images/IMG_room23.webp" alt="Thumbnail 1" class="slider-thumb active" data-index="0">
+                        <img src="images/IMG_room11.webp" alt="Thumbnail 2" class="slider-thumb" data-index="1">
+                        <img src="images/IMG_room12.webp" alt="Thumbnail 3" class="slider-thumb" data-index="2">
                     </div>
                 </div>
 
@@ -682,12 +786,10 @@
             <div class="footer-newsletter-inner">
                 <h3>Subscribe to Our Newsletter</h3>
                 <p>Stay updated with our latest offers, safari news, and cultural events.</p>
-                <form id="newsletter-form" class="newsletter-form">
-                    <input type="email" id="newsletter-email" placeholder="Your Email Address" required>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email Address" required>
                     <button type="submit">Subscribe</button>
                 </form>
-                <p id="newsletter-status" class="newsletter-status"
-                    style="display: none; margin-top: 1rem; font-weight: 500;"></p>
             </div>
         </div>
 
@@ -712,7 +814,6 @@
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="index.html#about">About Us</a></li>
-                    <li><a href="index.html#facilities">Facilities &amp; Experience</a></li>
                     <li><a href="index.html#gallery">Gallery</a></li>
                     <li><a href="index.html#contact">Contact</a></li>
                 </ul>
@@ -722,16 +823,25 @@
                 <h4>Contact Us</h4>
                 <ul class="footer-contact-info">
                     <li>
-                        <i class="fa-solid fa-location-dot"></i>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path
+                                d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
                         <span>Ngorongoro, Tanzania</span>
                     </li>
                     <li>
-                        <i class="fa-solid fa-phone"></i>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path
+                                d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56-.35-.12-.74-.03-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z" />
+                        </svg>
                         <span>+255 796 100 500</span>
                     </li>
                     <li>
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>info@jkmaasaihotel.com</span>
+                        <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path
+                                d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                        </svg>
+                        <span>reservations@jkmaasaihotel.com</span>
                     </li>
                 </ul>
             </div>
@@ -741,14 +851,24 @@
         <div class="footer-bottom">
             <p>&copy; 2026 JK Maasai Hotel. Ngorongoro, Tanzania.</p>
             <div class="footer-social">
-                <a href="#" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram"></i>
+                <a href="https://www.instagram.com/jkmaasaihotel?utm_source=qr" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                    </svg>
                 </a>
                 <a href="#" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook-f"></i>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                    </svg>
                 </a>
                 <a href="https://wa.me/255693979377" aria-label="WhatsApp">
-                    <i class="fa-brands fa-whatsapp"></i>
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                    </svg>
+                </a>
             </div>
         </div>
     </footer>
@@ -911,18 +1031,19 @@
             const calcNights = document.getElementById('calc-nights');
             const calcSubtotal = document.getElementById('calc-subtotal');
             const calcTotal = document.getElementById('calc-total');
-            const PRICE_PER_NIGHT = 110000;
-
+            let currentPricePerNight = 110000;
+            
             function calculatePrice() {
                 const checkInDate = new Date(checkInInput.value);
                 const checkOutDate = new Date(checkOutInput.value);
+                const isComingSoon = document.getElementById('dynamic-price').textContent === 'Coming Soon';
 
-                if (checkInDate && checkOutDate && checkOutDate > checkInDate) {
+                if (!isComingSoon && checkInDate && checkOutDate && checkOutDate > checkInDate) {
                     const diffTime = Math.abs(checkOutDate - checkInDate);
                     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
                     calcNights.textContent = diffDays;
-                    const total = diffDays * PRICE_PER_NIGHT;
+                    const total = diffDays * currentPricePerNight;
                     calcSubtotal.textContent = ' ' + total.toLocaleString('en-US');
                     calcTotal.textContent = ' ' + total.toLocaleString('en-US');
                     priceCalcBox.style.display = 'block';
@@ -954,7 +1075,8 @@
                     const guests = guestsInput.options[guestsInput.selectedIndex].text;
                     const total = calcTotal.textContent;
 
-                    let message = `Hello, I would like to book a Family Room at JK Maasai Hotel.\n\n`;
+                    let roomName = document.getElementById('dynamic-room-title') ? document.getElementById('dynamic-room-title').textContent : 'Family Room';
+                    let message = `Hello, I would like to book a ${roomName} at JK Maasai Hotel.\n\n`;
                     message += `*Check-in:* ${checkIn}\n`;
                     message += `*Check-out:* ${checkOut}\n`;
                     message += `*Guests:* ${guests}\n`;
@@ -969,6 +1091,141 @@
                     window.open(waUrl, '_blank');
                 });
             }
+
+            // ROOM DROPDOWN LOGIC
+            const titleDropdownToggle = document.getElementById('titleDropdownToggle');
+            const titleDropdownMenu = document.getElementById('titleDropdownMenu');
+            const dropdownItems = document.querySelectorAll('.title-dropdown-menu li');
+            const dynamicTitle = document.getElementById('dynamic-room-title');
+            const dynamicDesc = document.getElementById('dynamic-room-desc');
+            const sliderMainImgs = document.querySelectorAll('#room-slider img.lightbox-trigger');
+            const sliderThumbImgs = document.querySelectorAll('#slider-thumbs img.slider-thumb');
+
+            const roomData = {
+                king: {
+                    title: "Family King Room",
+                    desc: "Our Family Room is designed to give you plenty of space and comfort, making it perfect for families. It features a large bedroom with a cozy bed, a spacious bathroom, and a separate sitting area with a TV where you can relax and spend time together. Step outside onto the private balcony, a perfect spot for couples to enjoy tea or have a quiet conversation. Bright, airy, and welcoming, it’s a space where you can truly feel at home.",
+                    images: ["images/IMG_room23.webp", "images/IMG_room11.webp", "images/IMG_room12.webp"],
+                    price: "Tsh 110,000",
+                    priceLabel: "/ night",
+                    comingSoon: false,
+                    occupancy: "1-2 person"
+                },
+                twin: {
+                    title: "Family Twin Room",
+                    desc: "The Family Twin Room offers flexible sleeping arrangements with two comfortable beds, ideal for friends or smaller family groups. Enjoy the warm ambiance, complete with modern amenities, a relaxing seating area, and beautiful views to offer you the perfect retreat after a day of safari adventures.",
+                    images: ["images/IMG_room.webp", "images/IMG_room11.webp", "images/IMG_room21.webp"],
+                    price: "Coming Soon",
+                    priceLabel: "",
+                    comingSoon: true,
+                    occupancy: "2 person"
+                },
+                triple: {
+                    title: "Family Triple Room",
+                    desc: "Designed for larger families or groups, the Family Triple Room provides generous space and three luxurious beds. The room features a spacious en-suite bathroom, a comfortable seating area, and all essential amenities to ensure maximum comfort during your Ngorongoro stay.",
+                    images: ["images/IMG_room13.webp", "images/IMG_room1.webp", "images/IMG_room12.webp"],
+                    price: "Coming Soon",
+                    priceLabel: "",
+                    comingSoon: true,
+                    occupancy: "3 person"
+                }
+            };
+
+            // Toggle dropdown
+            if (titleDropdownToggle && titleDropdownMenu) {
+                titleDropdownToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    titleDropdownMenu.classList.toggle('show');
+                    this.classList.toggle('open');
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.title-dropdown')) {
+                        titleDropdownMenu.classList.remove('show');
+                        titleDropdownToggle.classList.remove('open');
+                    }
+                });
+            }
+
+            dropdownItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Update active class
+                    dropdownItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Close dropdown
+                    titleDropdownMenu.classList.remove('show');
+                    titleDropdownToggle.classList.remove('open');
+
+                    // Get room data
+                    const tabId = this.getAttribute('data-tab');
+                    const data = roomData[tabId];
+
+                    // Add fade-out effect for smooth transition
+                    dynamicTitle.style.opacity = 0;
+                    dynamicDesc.style.opacity = 0;
+                    const dynamicPrice = document.getElementById('dynamic-price');
+                    const dynamicPriceLabel = document.getElementById('dynamic-price-label');
+                    const comingSoonOverlay = document.getElementById('coming-soon-overlay');
+                    const dynamicOccupancy = document.getElementById('dynamic-occupancy');
+                    if (dynamicPrice) dynamicPrice.style.opacity = 0;
+                    if (dynamicPriceLabel) dynamicPriceLabel.style.opacity = 0;
+                    if (dynamicOccupancy) dynamicOccupancy.style.opacity = 0;
+                    
+                    setTimeout(() => {
+                        // Update text
+                        dynamicTitle.textContent = data.title;
+                        dynamicDesc.textContent = data.desc;
+                        if (dynamicPrice) dynamicPrice.textContent = data.price;
+                        if (dynamicPriceLabel) dynamicPriceLabel.textContent = data.priceLabel;
+                        if (dynamicOccupancy && data.occupancy) dynamicOccupancy.textContent = data.occupancy;
+                        
+                        // Fade in
+                        dynamicTitle.style.opacity = 1;
+                        dynamicDesc.style.opacity = 1;
+                        if (dynamicPrice) dynamicPrice.style.opacity = 1;
+                        if (dynamicPriceLabel) dynamicPriceLabel.style.opacity = 1;
+                        if (dynamicOccupancy) dynamicOccupancy.style.opacity = 1;
+
+                        // Toggle Coming Soon overlay
+                        const sliderThumbsContainer = document.getElementById('slider-thumbs');
+                        const sliderNavContainer = document.querySelector('.slider-nav');
+                        
+                        if (comingSoonOverlay) {
+                            if (data.comingSoon) {
+                                comingSoonOverlay.style.display = 'flex';
+                                if (sliderThumbsContainer) sliderThumbsContainer.style.display = 'none';
+                                if (sliderNavContainer) sliderNavContainer.style.display = 'none';
+                            } else {
+                                comingSoonOverlay.style.display = 'none';
+                                if (sliderThumbsContainer) sliderThumbsContainer.style.display = 'flex';
+                                if (sliderNavContainer) sliderNavContainer.style.display = 'flex';
+                            }
+                        }
+
+                        // Re-trigger calculation to hide/show properly
+                        if (typeof calculatePrice === 'function') {
+                            calculatePrice();
+                        }
+                    }, 200);
+
+                    // Update images
+                    data.images.forEach((src, idx) => {
+                        if(sliderMainImgs[idx]) {
+                            sliderMainImgs[idx].src = src;
+                        }
+                        if(sliderThumbImgs[idx]) {
+                            sliderThumbImgs[idx].src = src;
+                        }
+                    });
+                    
+                    // Reset slider to first image
+                    if (sliderThumbImgs[0]) {
+                        sliderThumbImgs[0].click();
+                    }
+                });
+            });
         });
     </script>
     <script src="js/newsletter.js"></script>
