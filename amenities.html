@@ -11,6 +11,8 @@
     <link rel="icon" type="image/png" href="images/Logo.png">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         .hero-amenities {
             height: 50vh;
@@ -133,41 +135,49 @@
 
 <body>
 
-    <!-- 1. HEADER -->
-    <header id="hero" class="header--dark hero-amenities">
-        <div class="header-bar" style="position: absolute; top: 0; left: 0; width: 100%; z-index: 10;">
+    <!-- New Sticky White Header -->
+    <header class="site-header">
+        <div class="header-bar">
             <a href="index.html" class="logo-link" aria-label="JK Maasai Hotel home">
-                <img src="images/Logo.png" alt="JK Maasai Hotel logo" class="logo logo-light" width="180" height="55"
-                    decoding="async">
-                <img src="images/LOGO-02.png" alt="JK Maasai Hotel logo" class="logo logo-dark" width="180" height="55"
-                    decoding="async">
+                <img src="images/Logo.png" alt="JK Maasai Hotel logo" class="logo logo-light" width="180" height="55" decoding="async">
             </a>
-            <div>
-                <nav class="header-nav">
-                    <ul class="nav-list">
-                        <li><a href="index.html">Home</a></li>
-                        <li class="dropdown">
-                            <a href="#">About Us</a>
-                            <ul class="dropdown-menu">
-                                <li><a href="index.html#about">Overview</a></li>
-                                <li><a href="why-us.html">Why Us</a></li>
-                                <li><a href="amenities.html" class="is-active">Amenities & Services</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="index.html#rooms">Accommodation</a></li>
-                        <li><a href="index.html#facilities">Facilities</a></li>
-                        <li><a href="index.html#gallery">Gallery</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                    </ul>
-                </nav>
+
+            <nav class="desktop-nav" role="navigation" aria-label="Main Navigation">
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-trigger" aria-haspopup="true" aria-expanded="false">About Us</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="index.html#about">Overview</a></li>
+                            <li><a href="why-us.html">Why Us</a></li>
+                            <li><a href="amenities.html" class="is-active">Amenities & Services</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="index.html#rooms">Accommodation</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <a href="index.html#contact" class="btn-book-now desktop-only-btn">BOOK NOW</a>
+                <a href="index.html#contact" class="btn-book-now mobile-only-btn">BOOK NOW</a>
+                <button class="hamburger-menu" aria-label="Toggle Navigation Menu" aria-expanded="false">
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                    <span class="hamburger-bar"></span>
+                </button>
             </div>
         </div>
+    </header>
 
+    <!-- 1. HERO -->
+    <section id="hero" class="header--dark hero-amenities">
         <div class="hero-content">
             <h1>Amenities & Services</h1>
             <p>Explore the many amenities and services that make us unique</p>
         </div>
-    </header>
+    </section>
 
     <!-- BREADCRUMB -->
     <div class="breadcrumb">
@@ -449,6 +459,135 @@
             });
         });
     </script>
-</body>
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu-drawer" class="mobile-menu-drawer" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Mobile Navigation Menu">
+        <div class="drawer-overlay"></div>
+        <div class="drawer-content">
+            <div class="drawer-header">
+                <a href="index.html" class="logo-link" aria-label="JK Maasai Hotel home">
+                    <img src="images/Logo.png" alt="JK Maasai Hotel logo" class="logo" width="150" height="46" decoding="async">
+                </a>
+                <button class="drawer-close" aria-label="Close Menu">
+                    <i data-lucide="x"></i>
+                </button>
+            </div>
+            
+            <nav class="drawer-nav" role="navigation" aria-label="Mobile Menu">
+                <ul class="drawer-menu-list">
+                    <li>
+                        <a href="index.html" class="drawer-menu-item">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="home" class="drawer-icon"></i>
+                                <span>Home</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#rooms" class="drawer-menu-item">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="bed-double" class="drawer-icon"></i>
+                                <span>Rooms & Suites</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#gallery" class="drawer-menu-item">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="utensils" class="drawer-icon"></i>
+                                <span>Dining</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#gallery" class="drawer-menu-item">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="sparkles" class="drawer-icon"></i>
+                                <span>Experiences</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="amenities.html" class="drawer-menu-item">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="flower-2" class="drawer-icon"></i>
+                                <span>Spa & Wellness</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#gallery" class="drawer-menu-item">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="camera" class="drawer-icon"></i>
+                                <span>Gallery</span>
+                            </span>
+                        </a>
+                    </li>
+                    
+                    <!-- Expandable: Explore -->
+                    <li class="drawer-accordion">
+                        <button class="drawer-menu-item accordion-trigger" aria-haspopup="true" aria-expanded="false">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="map-pinned" class="drawer-icon"></i>
+                                <span>Explore</span>
+                            </span>
+                            <i data-lucide="chevron-down" class="accordion-chevron"></i>
+                        </button>
+                        <ul class="drawer-submenu" aria-hidden="true">
+                            <li><a href="index.html#attractions">— Attractions</a></li>
+                            <li><a href="index.html#culture">— Maasai Culture</a></li>
+                            <li><a href="index.html#safari">— Safari Packages</a></li>
+                            <li><a href="index.html#activities">— Activities</a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- Expandable: About -->
+                    <li class="drawer-accordion">
+                        <button class="drawer-menu-item accordion-trigger" aria-haspopup="true" aria-expanded="false">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="file-text" class="drawer-icon"></i>
+                                <span>About</span>
+                            </span>
+                            <i data-lucide="chevron-down" class="accordion-chevron"></i>
+                        </button>
+                        <ul class="drawer-submenu" aria-hidden="true">
+                            <li><a href="index.html#about">— Overview</a></li>
+                            <li><a href="why-us.html">— Why Us</a></li>
+                            <li><a href="amenities.html" class="is-active">— Amenities & Services</a></li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <a href="index.html#contact" class="drawer-menu-item">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="phone" class="drawer-icon"></i>
+                                <span>Contact</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="index.html#contact" class="drawer-menu-item">
+                            <span class="drawer-menu-item-left">
+                                <i data-lucide="calendar" class="drawer-icon"></i>
+                                <span>Book Stay</span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="drawer-footer">
+                <div class="drawer-booking-container">
+                    <a href="index.html#contact" class="btn-drawer-book">BOOK YOUR STAY</a>
+                </div>
+                <div class="drawer-social">
+                    <a href="https://www.instagram.com/jkmaasaihotel?utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+                    <a href="#" aria-label="Facebook">Facebook</a>
+                    <a href="https://wa.me/255693979377" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="js/navigation.js"></script>
+</body>
 </html>
