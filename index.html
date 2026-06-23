@@ -158,7 +158,7 @@
                             </svg> 1 Bed</span>
                     </div>
                     <p style="margin-bottom: 1rem;">Perfect for simple, comfortable stays at a great value.</p>
-                    <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 1.5rem;">For Tsh 70,000/night</p>
+                    <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 1.5rem;">For $31/night</p>
                     <a href="standard-room.html" class="btn-submit"
                         style="text-decoration: none; display: block; text-align: center;">View Room</a>
                 </div>
@@ -188,7 +188,7 @@
                             </svg> Spacious</span>
                     </div>
                     <p style="margin-bottom: 1rem;">A favorite choice for guests who want extra comfort and space.</p>
-                    <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 1.5rem;">For Tsh 80,000/night</p>
+                    <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 1.5rem;">For $38/night</p>
                     <a href="deluxe-room.html" class="btn-submit"
                         style="text-decoration: none; display: block; text-align: center;">View Room</a>
                 </div>
@@ -215,7 +215,7 @@
                     </div>
                     <p style="margin-bottom: 1rem;">Ideal for families or groups looking for space and comfort
                         together.</p>
-                    <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 1.5rem;">For Tsh 110,000/night</p>
+                    <p style="font-size: 1.1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 1.5rem;">For $58/night</p>
                     <a href="family-room.html" class="btn-submit"
                         style="text-decoration: none; display: block; text-align: center;">View Room</a>
                 </div>
@@ -332,29 +332,26 @@
             <div class="booking-form-container">
                 <h3>Booking Request</h3>
                 <p class="form-instructions">Please fill out the form below to request a booking.</p>
-                <form name="booking-form" method="POST" data-netlify="true" netlify-honeypot="bot-field"
-                    class="booking-form" id="booking-form">
-                    <input type="hidden" name="form-name" value="booking-form">
-                    <input type="hidden" name="bot-field">
+                <form id="booking-form" class="booking-form">
 
                     <div class="form-group">
-                        <label for="name">Full Name *</label>
-                        <input type="text" id="name" name="name" required placeholder="Enter Full Name">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="full_name" required placeholder="Enter Full Name">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="email">Email Address *</label>
+                            <label for="email">Email Address</label>
                             <input type="email" id="email" name="email" required placeholder="email@example.com">
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone Number *</label>
+                            <label for="phone">Phone Number</label>
                             <input type="tel" id="phone" name="phone" required placeholder="Enter Phone Number">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="room-type">Room Type *</label>
+                        <label for="room-type">Room Type</label>
                         <select id="room-type" name="room-type" required>
                             <option value="" disabled selected>Select a Room Type</option>
                             <option value="Standard Room">Standard Room</option>
@@ -367,18 +364,18 @@
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="checkin">Check-in Date *</label>
-                            <input type="date" id="checkin" name="checkin" required>
+                            <label for="checkin">Check-in-Date</label>
+                            <input type="date" id="check-in-date" name="check_in" required>
                         </div>
                         <div class="form-group">
-                            <label for="checkout">Check-out Date *</label>
-                            <input type="date" id="checkout" name="checkout" required>
+                            <label for="checkout">Check-out-Date</label>
+                            <input type="date" id="check-out-date" name="check_out" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="adults">Adults *</label>
+                            <label for="adults">Adults</label>
                             <input type="number" id="adults" name="adults" min="1" required placeholder="1">
                         </div>
                         <div class="form-group">
@@ -388,7 +385,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="rooms">Number of Rooms *</label>
+                        <label for="rooms">Number of Rooms</label>
                         <input type="number" id="rooms" name="rooms" min="1" max="5" required placeholder="1">
                     </div>
 
@@ -841,5 +838,7 @@
     </div>
 
     <script src="js/navigation.js"></script>
+    <script type="module" src="./js/test-db.js"></script>
+    <script type="module" src="./js/bookings.js"></script>
 </body>
 </html>

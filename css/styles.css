@@ -1509,7 +1509,7 @@ ul.why-us {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2.5rem;
+    padding: 0.6rem 2.5rem;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
@@ -1518,7 +1518,7 @@ ul.why-us {
 /* Ensure only Logo.png (logo-light class used as main dark logo) shows in white header */
 .site-header .logo-light {
     display: block !important;
-    height: 120px; /* 2x larger (was 60px) */
+    height: 90px; /* 2x larger (was 60px) */
     width: auto;
     max-width: 320px; /* Fixed max-width to prevent browser circular dependency width calculation collapse */
     object-fit: contain;
@@ -1986,7 +1986,7 @@ ul.why-us {
 /* Tablet & Mobile layout (<= 1024px) */
 @media (max-width: 1024px) {
     .site-header .header-bar {
-        padding: 0.85rem 1.5rem;
+        padding: 0.5rem 1.5rem;
     }
     
     .desktop-nav {
@@ -2008,7 +2008,7 @@ ul.why-us {
 
 @media (max-width: 480px) {
     .site-header .logo-light {
-        height: 96px; /* 2x larger (was 48px) */
+        height: 72px; /* 2x larger (was 48px) */
         max-width: 180px; /* Prevent header overflow on mobile devices */
     }
     
