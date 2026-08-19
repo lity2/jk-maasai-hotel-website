@@ -681,31 +681,7 @@
             updateGalleryDisplay();
 
             // Netlify Form AJAX Submission
-            const bookingForm = document.getElementById('booking-form');
-            const successMessage = document.getElementById('booking-success-message');
-
-            if (bookingForm) {
-                bookingForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-
-                    const formData = new FormData(bookingForm);
-
-                    fetch('/', {
-                        method: 'POST',
-                        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                        body: new URLSearchParams(formData).toString()
-                    })
-                        .then(() => {
-                            successMessage.style.display = 'block';
-                            bookingForm.reset();
-                            // Hide success message after 5 seconds
-                            setTimeout(() => {
-                                successMessage.style.display = 'none';
-                            }, 8000);
-                        })
-                        .catch((error) => alert('Form submission failed. Please try again.'));
-                });
-            }
+           
         });
     </script>
     <!-- Mobile Navigation Drawer -->

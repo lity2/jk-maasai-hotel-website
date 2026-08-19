@@ -20,7 +20,11 @@
   "dependencies": {
     "@supabase/supabase-js": "^2.106.2",
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "resend": "^6.17.2"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "netlify-cli": "^26.2.0"
+  }
 }
