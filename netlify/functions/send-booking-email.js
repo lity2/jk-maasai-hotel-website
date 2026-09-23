@@ -1,8 +1,19 @@
 import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const supabaseUrl = process.env.SUPABASE_URL || process.env.VITE_SUPABASE_URL;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
 export async function handler(event) {
+  if (event.httpMethod && event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      body: JSON.stringify({ success: false, error: "Method Not Allowed" })
+    };
+  }
+
   try {
     const {
       full_name,
@@ -14,9 +25,61 @@ export async function handler(event) {
       adults,
       children,
       number_of_rooms,
-      special_request,
-      booking_reference
-    } = JSON.parse(event.body);
+      special_request
+    } = JSON.parse(event.body || "{}");
+
+    if (!full_name || !email || !room_type || !check_in || !check_out) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ success: false, error: "Missing required booking fields." })
+      };
+    }
+
+    if (!supabaseUrl || !supabaseServiceKey) {
+      console.error("Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY environment variable.");
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          success: false,
+          error: "Server configuration error: SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables must be configured on Netlify."
+        })
+      };
+    }
+
+    const supabase = createClient(supabaseUrl, supabaseServiceKey);
+
+    // Insert booking using elevated Service Role Key privileges
+    const { data, error: dbError } = await supabase
+      .from("bookings")
+      .insert([
+        {
+          full_name,
+          email,
+          phone,
+          room_type,
+          check_in,
+          check_out,
+          special_request,
+          adults,
+          children,
+          number_of_rooms
+        }
+      ])
+      .select()
+      .single();
+
+    if (dbError) {
+      console.error("Supabase server-side insert error:", dbError);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          success: false,
+          error: dbError.message || "Failed to save booking record to database."
+        })
+      };
+    }
+
+    const booking_reference = data.booking_reference;
 
     // Email to the hotel
     const hotelEmail = await resend.emails.send({
@@ -76,32 +139,34 @@ export async function handler(event) {
       `
     });
 
-    console.log("Hotel Email:");
-    console.log(JSON.stringify(hotelEmail, null, 2));
+    console.log("Hotel Email:", JSON.stringify(hotelEmail, null, 2));
+    console.log("Guest Email:", JSON.stringify(guestEmail, null, 2));
 
-    console.log("Guest Email:");
-    console.log(JSON.stringify(guestEmail, null, 2));
-    console.log("Guest email:", email);
+    if (hotelEmail.error || guestEmail.error) {
+      const emailErrorDetails = hotelEmail.error || guestEmail.error;
+      console.error("Hotel Email Error:", hotelEmail.error);
+      console.error("Guest Email Error:", guestEmail.error);
 
-    if (hotelEmail.error) {
-      console.error("Hotel email error:", hotelEmail.error);
-    }
-
-    if (guestEmail.error) {
-      console.error("Guest email error:", guestEmail.error);
+      return {
+        statusCode: 500,
+        body: JSON.stringify({
+          success: false,
+          error: `Your booking (Ref: ${booking_reference}) was saved, but confirmation email delivery failed (${emailErrorDetails.message || "Email error"}). Please contact support directly instead of re-submitting to avoid duplicate bookings.`,
+          booking_reference: booking_reference
+        })
+      };
     }
 
     return {
       statusCode: 200,
       body: JSON.stringify({
-        success: true
+        success: true,
+        booking_reference: booking_reference
       })
     };
 
   } catch (error) {
-
-    console.error(error);
-
+    console.error("Booking handler error:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({
@@ -109,6 +174,5 @@ export async function handler(event) {
         error: error.message
       })
     };
-
   }
 }
