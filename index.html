@@ -18,6 +18,8 @@
         content="Book your stay at JK Maasai Hotel in Ngorongoro. Comfortable rooms, beautiful views, and authentic safari experience.">
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Flatpickr Datepicker CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body>    <!-- New Sticky White Header -->
@@ -356,20 +358,19 @@
                             <option value="" disabled selected>Select a Room Type</option>
                             <option value="Standard Room">Standard Room</option>
                             <option value="Deluxe Room">Deluxe Room</option>
-                            <option value="Family King Room">Family King</option>
-                            <option value="Family Twin Room">Family Twin</option>
-                            
+                            <option value="Family King">Family King</option>
+                            <option value="Family Twin">Family Twin</option>
                         </select>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="checkin">Check-in-Date</label>
-                            <input type="date" id="check-in-date" name="check_in" required>
+                            <label for="check-in-date">Check-in Date</label>
+                            <input type="text" id="check-in-date" name="check_in" required placeholder="Select Check-in Date">
                         </div>
                         <div class="form-group">
-                            <label for="checkout">Check-out-Date</label>
-                            <input type="date" id="check-out-date" name="check_out" required>
+                            <label for="check-out-date">Check-out Date</label>
+                            <input type="text" id="check-out-date" name="check_out" required placeholder="Select Check-out Date">
                         </div>
                     </div>
 
@@ -386,7 +387,7 @@
 
                     <div class="form-group">
                         <label for="rooms">Number of Rooms</label>
-                        <input type="number" id="rooms" name="rooms" min="1" max="5" required placeholder="1">
+                        <input type="number" id="rooms" name="rooms" min="1" max="5" required value="1" placeholder="1">
                     </div>
 
                     <div class="form-group">
@@ -395,7 +396,9 @@
                             placeholder="Any special requests or inquiries?"></textarea>
                     </div>
 
-                    <button type="submit" class="btn-submit">Check Availability</button>
+                    <div id="availability-message" style="display: none; margin-bottom: 1.25rem; padding: 0.85rem 1rem; border-radius: 4px; font-size: 0.95rem; text-align: center; font-weight: 500;"></div>
+
+                    <button type="submit" class="btn-submit" id="btn-submit-booking">Submit Booking Request</button>
 
                     <div id="booking-success-message"
                         style="display: none; color: #155724; background-color: #d4edda; border: 1px solid #c3e6cb; padding: 1rem; margin-top: 1.5rem; border-radius: 4px; font-weight: 500; text-align: center;">
@@ -814,7 +817,7 @@
     </div>
 
     <script src="js/navigation.js"></script>
-    <script type="module" src="./js/test-db.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script type="module" src="./js/bookings.js"></script>
 </body>
 </html>
